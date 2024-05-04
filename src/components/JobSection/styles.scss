@@ -6,10 +6,17 @@
 
     .Filter-Section{
         padding: 20px;
+        display: flex;
+        gap: 20px;
     }
 
     .JobSection-JobCardContainer{
         flex-grow: 1;
-        overflow: auto;
+
+        .nodata-text{
+            font-size: 25px;
+            color: #787878;
+            margin-left: 20px;
+        }
     }
 }

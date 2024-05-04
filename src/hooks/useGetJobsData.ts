@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-type JobData = {
+export type JobData = {
   companyName: string;
   jdLink: string;
   jdUid: string;
@@ -25,29 +25,6 @@ const useGetJobsData = () => {
   useEffect(() => {}, []);
 
   /**
-   * Get Jobs data after initial load.
-   */
-  const getJobsData = async () => {
-    setLoading(true);
-    const url = `https://api.weekday.technology/adhoc/getSampleJdJSON`;
-    const param = {
-      limit: 10,
-      offset: page,
-    };
-    try {
-      const response = await axios.post(url, param);
-      console.log(response);
-      setData(response.data.jdList);
-      setPage(page + 1);
-    } catch (error) {
-      //ts
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
- 
-  /**
    * Load jobs data for next iterartion.
    */
   const getJobsDataNextIteration = async () => {
@@ -60,7 +37,7 @@ const useGetJobsData = () => {
     try {
       const response = await axios.post(url, param);
       console.log(response);
-      setData(prevData => [...prevData,...response.data.jdList]);
+      setData((prevData) => [...prevData, ...response.data.jdList]);
       setPage(page + 1);
     } catch (error) {
       //ts
@@ -71,10 +48,32 @@ const useGetJobsData = () => {
   };
 
   useEffect(() => {
+    /**
+     * Get Jobs data after initial load.
+     */
+    const getJobsData = async () => {
+      setLoading(true);
+      const url = `https://api.weekday.technology/adhoc/getSampleJdJSON`;
+      const param = {
+        limit: 10,
+        offset: 0,
+      };
+      try {
+        const response = await axios.post(url, param);
+        console.log(response);
+        setData(response.data.jdList);
+        setPage(page + 1);
+      } catch (error) {
+        //ts
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
     getJobsData();
   }, []);
 
-  return { isLoading, data, getJobsData, getJobsDataNextIteration };
+  return { isLoading, data, getJobsDataNextIteration };
 };
 
 export default useGetJobsData;
