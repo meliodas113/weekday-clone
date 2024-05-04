@@ -1,0 +1,10 @@
+.JobSection-Container{
+    width: 100%;
+    height: 100%;
+
+    .JobSection-JobCardContainer{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
