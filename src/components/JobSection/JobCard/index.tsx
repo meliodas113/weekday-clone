@@ -40,8 +40,13 @@ const JobCard = (props: Props) => {
         <span className="MinExpHeading">Minimum Experience</span>
         <span className="MinExpValue">3 years</span>
       </Box>
+      <Box className='Btn-Container'>
       <Box className='ApplyBtn'>
         Apply 🚀
+      </Box>
+      <Box className='ReferralBtn'>
+        Ask for Referral
+      </Box>
       </Box>
     </Box>
   );
