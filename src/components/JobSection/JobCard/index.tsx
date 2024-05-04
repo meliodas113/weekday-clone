@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./styles.scss";
 
 import { Box, Modal, Typography } from "@mui/material";
+import { MATERIAL_UI_MODAL_STYLE } from "../../../constants/constants";
 
 type Props = {
   name: string;
@@ -17,20 +18,10 @@ type Props = {
   maxSalary?: number;
 };
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    outline:'none',
-    borderRadius:'10px',
-    p: 4,
-  };
-
 const JobCard = (props: Props) => {
+  /**
+   * Logic to operate job description modal.
+   */
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,7 +30,7 @@ const JobCard = (props: Props) => {
    * Check min and max salary and return formatted string to display.
    * @returns Estimated salary formatted string.
    */
-  const getEstimatedSalary = () => {
+  const getEstimatedSalary = (): string => {
     if (props.minSalary && props.maxSalary) {
       return `${props.currency} ${props.minSalary}K - ${props.currency} ${props.maxSalary}K`;
     }
@@ -53,7 +44,7 @@ const JobCard = (props: Props) => {
    * Check min and max exp and return formatted string to display.
    * @returns Exp required formatted string.
    */
-  const getExperience = () => {
+  const getExperience = (): string => {
     if (props.minExp && props.maxExp) {
       return `${props.minExp} - ${props.maxExp} years`;
     }
@@ -100,7 +91,9 @@ const JobCard = (props: Props) => {
       </Box>
       <Box className="JobCard-JobDescription">
         <Box className="BackDrop">
-          <span className="BackDrop-Text" onClick={handleOpen}>Show more.</span>
+          <span className="BackDrop-Text" onClick={handleOpen}>
+            Show more.
+          </span>
         </Box>
         <Box className="JobCard-DescriptionTitle">About Company:</Box>
         <Box className="JobCard-DescriptionText">{props.description}</Box>
@@ -121,7 +114,7 @@ const JobCard = (props: Props) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={MATERIAL_UI_MODAL_STYLE}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             About this job:
           </Typography>

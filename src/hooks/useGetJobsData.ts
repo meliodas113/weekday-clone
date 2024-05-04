@@ -1,20 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-export type JobData = {
-  companyName: string;
-  jdLink: string;
-  jdUid: string;
-  jobDetailsFromCompany: string;
-  jobRole: string;
-  location: string;
-  logoUrl: string;
-  maxExp?: number;
-  maxJdSalary?: number;
-  minExp?: number;
-  minJdSalary?: number;
-  salaryCurrencyCode: string;
-};
+import { DEFAULT_API_PARAM, JOBS_API_URL, PAGE_SIZE } from "../constants/constants";
+import { JobData } from "../types";
 
 const useGetJobsData = () => {
   const [data, setData] = useState<JobData[]>([]);
@@ -31,7 +18,7 @@ const useGetJobsData = () => {
     setLoading(true);
     const url = `https://api.weekday.technology/adhoc/getSampleJdJSON`;
     const param = {
-      limit: 10,
+      limit: PAGE_SIZE,
       offset: page,
     };
     try {
@@ -53,16 +40,11 @@ const useGetJobsData = () => {
      */
     const getJobsData = async () => {
       setLoading(true);
-      const url = `https://api.weekday.technology/adhoc/getSampleJdJSON`;
-      const param = {
-        limit: 10,
-        offset: 0,
-      };
       try {
-        const response = await axios.post(url, param);
+        const response = await axios.post(JOBS_API_URL, DEFAULT_API_PARAM);
         console.log(response);
         setData(response.data.jdList);
-        setPage(page + 1);
+        setPage(prevPage => prevPage + 1);
       } catch (error) {
         //ts
         setError(error);
@@ -73,7 +55,7 @@ const useGetJobsData = () => {
     getJobsData();
   }, []);
 
-  return { isLoading, data, getJobsDataNextIteration };
+  return { isLoading, data, getJobsDataNextIteration, error };
 };
 
 export default useGetJobsData;
