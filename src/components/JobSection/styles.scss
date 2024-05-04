@@ -3,8 +3,8 @@
     height: 100%;
 
     .JobSection-JobCardContainer{
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
+        padding-top:20px;
+        padding-bottom: 20px;
+        flex-grow: 1;
     }
 }

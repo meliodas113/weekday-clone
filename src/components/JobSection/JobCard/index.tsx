@@ -1,52 +1,92 @@
-import React from "react";
 import "./styles.scss";
 
 import { Box } from "@mui/material";
 
-type Props = {};
+type Props = {
+  name: string;
+  role: string;
+  location: string;
+  link: string;
+  description: string;
+  image: string;
+  currency: string;
+  minExp?: number;
+  maxExp?: number;
+  minSalary?: number;
+  maxSalary?: number;
+};
 
 const JobCard = (props: Props) => {
+  /**
+   * Check min and max salary and return formatted string to display.
+   * @returns Estimated salary formatted string.
+   */
+  const getEstimatedSalary = () => {
+    if (props.minSalary && props.maxSalary) {
+      return `${props.currency} ${props.minSalary}K - ${props.currency} ${props.maxSalary}K`;
+    }
+    if (props.minSalary) {
+      return `${props.currency} ${props.minSalary}K`;
+    }
+    return `${props.currency} ${props.maxSalary}K`;
+  };
+
+  /**
+   * Check min and max exp and return formatted string to display.
+   * @returns Exp required formatted string.
+   */
+  const getExperience = () => {
+    if (props.minExp && props.maxExp) {
+      return `${props.minExp} - ${props.maxExp} years`;
+    }
+    if (props.minExp) {
+      return `${props.minExp} years`;
+    }
+    if(props.maxExp){
+        return `${props.maxExp}years`;
+    }
+
+    return 'Not Specified'
+  };
+
   return (
     <Box className="JobCard">
       <Box className="JobCard-TimeLabel">Posted 1d ago ⏰</Box>
       <Box className="JobCard-DetailsWrapper">
-        <Box className="JobCard-Logo"></Box>
+        <Box className="JobCard-Logo">
+          <img
+            src={props.image}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+            alt="weekday"
+          />
+        </Box>
         <Box className="JobCard-DetailsContainer">
-          <span className="Name">Glean</span>
-          <span className="Designatiom">Legal Counsel</span>
-          <span className="Loaction">Gurugram</span>
+          <span className="Name">{props.name}</span>
+          <span className="Designatiom">{props.role}</span>
+          <span className="Loaction">{props.location}</span>
         </Box>
       </Box>
-      <Box className="JobCard-EstSalary">Estimated Salary: ₹14 - 18 LPA 💰</Box>
+      <Box className="JobCard-EstSalary">
+        Estimated Salary: {getEstimatedSalary()} 💰
+      </Box>
       <Box className="JobCard-JobDescription">
-        <Box className='BackDrop'>
-            <span className='BackDrop-Text'>Show more.</span>
+        <Box className="BackDrop">
+          <span className="BackDrop-Text">Show more.</span>
         </Box>
         <Box className="JobCard-DescriptionTitle">About Company:</Box>
-        <Box className="JobCard-DescriptionText">
-          Generative AI powered by search. Glean is the AI-powered work
-          assistant— across all your company's data. 🔍 Answers grounded in your
-          enterprise knowledge graph. 🔒 Responsible AI for your enterprise. ⚡
-          Easy to use, ready to go— right out of the box. About Glean We’re on a
-          mission to make knowledge work faster and more humane. We believe that
-          AI will fundamentally transform how people work. In the future,
-          everyone will work in tandem with expert AI assistants who find
-          knowledge, create and synthesize information, and execute work. These
-          assistants will free people up to focus on the higher-level, creative
-          aspects of their work.
-        </Box>
+        <Box className="JobCard-DescriptionText">{props.description}</Box>
       </Box>
-      <Box className='JobCard-MinExpWrapper'>
+      <Box className="JobCard-MinExpWrapper">
         <span className="MinExpHeading">Minimum Experience</span>
-        <span className="MinExpValue">3 years</span>
+        <span className="MinExpValue">{getExperience()}</span>
       </Box>
-      <Box className='Btn-Container'>
-      <Box className='ApplyBtn'>
-        Apply 🚀
-      </Box>
-      <Box className='ReferralBtn'>
-        Ask for Referral
-      </Box>
+      <Box className="Btn-Container">
+        <Box className="ApplyBtn">Apply 🚀</Box>
+        <Box className="ReferralBtn">Ask for Referral</Box>
       </Box>
     </Box>
   );

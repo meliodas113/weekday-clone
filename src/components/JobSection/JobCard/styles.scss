@@ -1,15 +1,14 @@
-.JobCard{
-    width: 350px;
+.JobCard {
+    width: auto;
     height: auto;
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    box-shadow: 0px 3px 13px -1px rgba(133,133,133,1);
+    box-shadow: 0px 3px 13px -1px rgba(133, 133, 133, 1);
     border-radius: 10px;
-    margin: 20px;
 
-    .JobCard-TimeLabel{
+    .JobCard-TimeLabel {
         width: 95px;
         padding: 5px;
         border: 1px solid #a3a3a3;
@@ -19,101 +18,105 @@
         font-size: 10px;
     }
 
-    .JobCard-DetailsWrapper{
+    .JobCard-DetailsWrapper {
         display: flex;
         gap: 20px;
-        .JobCard-Logo{
+
+        .JobCard-Logo {
             width: 40px;
             height: 40px;
             background-color: aqua;
             border-radius: 50%;
         }
 
-        .JobCard-DetailsContainer{
+        .JobCard-DetailsContainer {
             display: flex;
             flex-direction: column;
             justify-content: center;
             gap: 5px;
 
-            .Name{
+            .Name {
                 font-weight: bold;
                 font-size: 12px;
                 color: #787878;
             }
 
-            .Designatiom{
+            .Designatiom {
                 font-size: 15px;
             }
 
-            .Loaction{
-                font-size: 12px; 
+            .Loaction {
+                font-size: 12px;
             }
         }
     }
 
-    .JobCard-EstSalary{
+    .JobCard-EstSalary {
         font-size: 14px;
         color: #787878;
     }
 
-    .JobCard-JobDescription{
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 20px;
-
-      .BackDrop{
-        position: absolute;
-        bottom: 0;
-        left: 0;
+    .JobCard-JobDescription {
         width: 100%;
-        height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
-        font-size: 14px;
-        color: #787878;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 20px;
 
-        .BackDrop-Text{
-            cursor: pointer;
-            color: #4943da;
-            letter-spacing: 1px;
+        .BackDrop {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            font-size: 14px;
+            color: #787878;
 
-            &:hover{
-                opacity: 0.8;
-            }        }
-      }
+            .BackDrop-Text {
+                cursor: pointer;
+                color: #4943da;
+                letter-spacing: 1px;
 
-      .JobCard-DescriptionText{
-        margin-top: 10px;
-        color: #787878;
-        font-size: 14px;
-      }
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+
+        .JobCard-DescriptionText {
+            margin-top: 10px;
+            color: #787878;
+            font-size: 14px;
+        }
 
 
     }
 
-    .JobCard-MinExpWrapper{
+    .JobCard-MinExpWrapper {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        .MinExpHeading{
+
+        .MinExpHeading {
             font-size: 16px;
             color: #787878;
         }
 
-        .MinExpValue{
+        .MinExpValue {
             font-size: 14px;
         }
-      }
+    }
 
-      .Btn-Container{
+    .Btn-Container {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        .ApplyBtn{
+
+        .ApplyBtn {
             width: 100%;
             height: 50px;
             display: flex;
@@ -123,13 +126,13 @@
             background-color: rgb(85, 239, 196);
             border-radius: 5px;
             cursor: pointer;
-    
-            &:hover{
+
+            &:hover {
                 opacity: 0.8;
             }
-          }
-    
-          .ReferralBtn{
+        }
+
+        .ReferralBtn {
             width: 100%;
             height: 50px;
             display: flex;
@@ -140,12 +143,12 @@
             border-radius: 5px;
             color: white;
             cursor: pointer;
-    
-            &:hover{
+
+            &:hover {
                 opacity: 0.8;
             }
-          }
-      }
+        }
+    }
 
 
 }
