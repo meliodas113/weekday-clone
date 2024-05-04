@@ -20,23 +20,48 @@ const useGetJobsData = () => {
   const [data, setData] = useState<JobData[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {}, []);
 
   /**
-   * Claim reward points for user.
+   * Get Jobs data after initial load.
    */
   const getJobsData = async () => {
     setLoading(true);
     const url = `https://api.weekday.technology/adhoc/getSampleJdJSON`;
     const param = {
       limit: 10,
-      offset: 0,
+      offset: page,
     };
     try {
       const response = await axios.post(url, param);
       console.log(response);
       setData(response.data.jdList);
+      setPage(page + 1);
+    } catch (error) {
+      //ts
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+ 
+  /**
+   * Load jobs data for next iterartion.
+   */
+  const getJobsDataNextIteration = async () => {
+    setLoading(true);
+    const url = `https://api.weekday.technology/adhoc/getSampleJdJSON`;
+    const param = {
+      limit: 10,
+      offset: page,
+    };
+    try {
+      const response = await axios.post(url, param);
+      console.log(response);
+      setData(prevData => [...prevData,...response.data.jdList]);
+      setPage(page + 1);
     } catch (error) {
       //ts
       setError(error);
@@ -49,7 +74,7 @@ const useGetJobsData = () => {
     getJobsData();
   }, []);
 
-  return { isLoading, data, getJobsData };
+  return { isLoading, data, getJobsData, getJobsDataNextIteration };
 };
 
 export default useGetJobsData;

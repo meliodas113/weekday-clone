@@ -1,6 +1,7 @@
+import { useState } from "react";
 import "./styles.scss";
 
-import { Box } from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 
 type Props = {
   name: string;
@@ -16,7 +17,24 @@ type Props = {
   maxSalary?: number;
 };
 
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    outline:'none',
+    borderRadius:'10px',
+    p: 4,
+  };
+
 const JobCard = (props: Props) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   /**
    * Check min and max salary and return formatted string to display.
    * @returns Estimated salary formatted string.
@@ -42,11 +60,18 @@ const JobCard = (props: Props) => {
     if (props.minExp) {
       return `${props.minExp} years`;
     }
-    if(props.maxExp){
-        return `${props.maxExp}years`;
+    if (props.maxExp) {
+      return `${props.maxExp}years`;
     }
 
-    return 'Not Specified'
+    return "Not Specified";
+  };
+
+  /**
+   * Open the job url in new tab.
+   */
+  const openJobLink = () => {
+    window.open(props.link, "target:blank");
   };
 
   return (
@@ -75,7 +100,7 @@ const JobCard = (props: Props) => {
       </Box>
       <Box className="JobCard-JobDescription">
         <Box className="BackDrop">
-          <span className="BackDrop-Text">Show more.</span>
+          <span className="BackDrop-Text" onClick={handleOpen}>Show more.</span>
         </Box>
         <Box className="JobCard-DescriptionTitle">About Company:</Box>
         <Box className="JobCard-DescriptionText">{props.description}</Box>
@@ -85,9 +110,26 @@ const JobCard = (props: Props) => {
         <span className="MinExpValue">{getExperience()}</span>
       </Box>
       <Box className="Btn-Container">
-        <Box className="ApplyBtn">Apply 🚀</Box>
+        <Box className="ApplyBtn" onClick={openJobLink}>
+          Apply 🚀
+        </Box>
         <Box className="ReferralBtn">Ask for Referral</Box>
       </Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            About this job:
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {props.description}
+          </Typography>
+        </Box>
+      </Modal>
     </Box>
   );
 };
