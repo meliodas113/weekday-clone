@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+:root{
+  --lightText: #787878
+}
+
 @font-face {
   font-family: 'Lexend';
   src: url('fonts/Lexend/Lexend-VariableFont_wght.ttf');

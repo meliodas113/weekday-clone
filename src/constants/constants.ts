@@ -12,6 +12,9 @@ export const ROLES_VALUES = ["Frontend", "Backend", "ios", "Android"];
 export const EXP_VALUES = ["1", "2", "3", "4"];
 export const SALARY_VALUES = ["10", "20", "30", "40", "50"];
 
+export const APPLY_BTN_COLOR = 'rgb(85, 239, 196)';
+export const REFERRAL_BTN_COLOR = 'rgb(73, 67, 218)';
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 export const MenuProps = {

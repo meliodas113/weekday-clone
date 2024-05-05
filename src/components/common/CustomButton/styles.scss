@@ -1,0 +1,15 @@
+.CustomButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Lexend';
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

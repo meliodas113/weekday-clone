@@ -4,6 +4,8 @@ import "./styles.scss";
 import { Box } from "@mui/material";
 
 import {
+  APPLY_BTN_COLOR,
+  REFERRAL_BTN_COLOR,
   generateRandomNumber,
 } from "../../../constants/constants";
 import REF_MALE from "../../../assets/ref-male.jpeg";
@@ -13,6 +15,8 @@ import { JobCardProps } from "../../../types";
 import ReferralUser from "./ReferalUser";
 import FluidImage from "../../common/FluidImage";
 import JobDetailsModal from "./JobDetailsModal";
+import LableTile from "../../common/LableTile";
+import CustomButtons from "../../common/CustomButton";
 
 const JobCard = (props: JobCardProps) => {
   /**
@@ -63,9 +67,10 @@ const JobCard = (props: JobCardProps) => {
 
   return (
     <Box className="JobCard">
-      <Box className="JobCard-TimeLabel">
-        ⌛ Posted {`${generateRandomNumber()}`}d ago
-      </Box>
+      <LableTile
+        width="95px"
+        labelContent={`⌛ Posted ${generateRandomNumber()}d ago`}
+      />
       <Box className="JobCard-DetailsWrapper">
         <Box className="JobCard-Logo">
           <FluidImage src={props.image} />
@@ -93,14 +98,28 @@ const JobCard = (props: JobCardProps) => {
         <span className="MinExpValue">{getExperience()}</span>
       </Box>
       <Box className="Btn-Container">
-        <Box className="ApplyBtn" onClick={openJobLink}>
-          ⚡ Apply
-        </Box>
-        <Box className="ReferralBtn">
-          <ReferralUser image={REF_MALE} isOnline={true} />
-          <ReferralUser image={REF_FEMALE} isOnline={false} />
-          Ask for Referral
-        </Box>
+        <CustomButtons
+          cta={"⚡ Apply"}
+          ctaColor="black"
+          color={APPLY_BTN_COLOR}
+          width="100%"
+          height="50px"
+          onClick={openJobLink}
+        />
+        <CustomButtons
+          cta={"Ask for Referral"}
+          ctaColor="white"
+          color={REFERRAL_BTN_COLOR}
+          width="100%"
+          height="50px"
+          onClick={openJobLink}
+          children={
+            <>
+              <ReferralUser image={REF_MALE} isOnline={true} />
+              <ReferralUser image={REF_FEMALE} isOnline={false} />
+            </>
+          }
+        />
       </Box>
       <JobDetailsModal
         open={openJobDetailsModal}
