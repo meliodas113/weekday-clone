@@ -27,7 +27,6 @@ const JobSection = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrapwer = () => setOpenDrawer(true);
   const handleCloseDrawer = () => setOpenDrawer(false);
-  console.log(data);
 
   /**
    * Trigger infinite scroll function when observer gets visible.

@@ -1,13 +1,12 @@
 import { Box, Grid } from "@mui/material";
 
-import { JobData } from "../../../types";
 import JobCard from "../JobCard";
 
-type Props = {
-  data: JobData[];
-};
+import { JobsGridComponentProps } from "../../../types";
 
-const JobsGridComponent = (props: Props) => {
+
+
+const JobsGridComponent = (props: JobsGridComponentProps) => {
   return (
     <Grid
       container

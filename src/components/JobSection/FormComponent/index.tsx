@@ -6,7 +6,6 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
-  SelectChangeEvent,
 } from "@mui/material";
 
 import {
@@ -16,17 +15,10 @@ import {
   SALARY_VALUES,
 } from "../../../constants/constants";
 
-type Props = {
-  width:number | string, //Desired width of input elements.
-  selectedRoles: string[];
-  selectedExp: string[];
-  selectedSalary: string[];
-  handleRolesChange: (event: SelectChangeEvent<string[]>) => void;
-  handleExpChange: (event: SelectChangeEvent<string[]>) => void;
-  handleSalaryChange: (event: SelectChangeEvent<string[]>) => void;
-};
+import { FormComponentProps } from "../../../types";
 
-const FormComponent = (props: Props) => {
+
+const FormComponent = (props: FormComponentProps) => {
   return (
     <>
       <FormControl sx={{ m: 1, width: props.width }}>

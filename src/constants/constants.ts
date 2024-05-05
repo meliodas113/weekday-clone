@@ -47,16 +47,28 @@ export const getJobItemExperience = (item: JobData): number => {
   return 0;
 };
 
-  /**
-   *
-   * @param item Current job item.
-   * @param salary Salary filter applied.
-   * @returns Boolean if the current job item satisfies salary filter applied.
-   */
-  export const getItemSalaryEligible = (item: JobData, salary: number) => {
-    if (item.minJdSalary && item.maxJdSalary)
-      return salary >= item.minJdSalary && salary <= item.maxJdSalary;
-    if (item.minJdSalary) return salary >= item.minJdSalary;
-    if (item.maxJdSalary) return salary >= item.maxJdSalary;
-    return false;
-  };
+/**
+ *
+ * @param item Current job item.
+ * @param salary Salary filter applied.
+ * @returns Boolean if the current job item satisfies salary filter applied.
+ */
+export const getItemSalaryEligible = (
+  item: JobData,
+  salary: number
+): boolean => {
+  if (item.minJdSalary && item.maxJdSalary)
+    return salary >= item.minJdSalary && salary <= item.maxJdSalary;
+  if (item.minJdSalary) return salary >= item.minJdSalary;
+  if (item.maxJdSalary) return salary >= item.maxJdSalary;
+  return false;
+};
+
+/**
+ * Generate a random number to display in UI as timestamp is not available in response.
+ * @returns Number between 1-10.
+ */
+export const generateRandomNumber = () => {
+  const randomNumber = Math.floor(Math.random() * 10) + 1;
+  return randomNumber;
+};

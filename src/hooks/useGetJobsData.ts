@@ -5,7 +5,7 @@ import { JobData } from "../types";
 
 const useGetJobsData = () => {
   const [data, setData] = useState<JobData[]>([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
   const [page, setPage] = useState(0);
 
@@ -23,7 +23,6 @@ const useGetJobsData = () => {
     };
     try {
       const response = await axios.post(url, param);
-      console.log(response);
       setData((prevData) => [...prevData, ...response.data.jdList]);
       setPage(page + 1);
     } catch (error) {
@@ -42,7 +41,6 @@ const useGetJobsData = () => {
       setLoading(true);
       try {
         const response = await axios.post(JOBS_API_URL, DEFAULT_API_PARAM);
-        console.log(response);
         setData(response.data.jdList);
         setPage(prevPage => prevPage + 1);
       } catch (error) {

@@ -2,23 +2,14 @@ import { useState } from "react";
 import "./styles.scss";
 
 import { Box, Modal, Typography } from "@mui/material";
-import { MATERIAL_UI_MODAL_STYLE } from "../../../constants/constants";
 
-type Props = {
-  name: string;
-  role: string;
-  location: string;
-  link: string;
-  description: string;
-  image: string;
-  currency: string;
-  minExp?: number;
-  maxExp?: number;
-  minSalary?: number;
-  maxSalary?: number;
-};
+import {
+  MATERIAL_UI_MODAL_STYLE,
+  generateRandomNumber,
+} from "../../../constants/constants";
+import { JobCardProps } from "../../../types";
 
-const JobCard = (props: Props) => {
+const JobCard = (props: JobCardProps) => {
   /**
    * Logic to operate job description modal.
    */
@@ -67,7 +58,9 @@ const JobCard = (props: Props) => {
 
   return (
     <Box className="JobCard">
-      <Box className="JobCard-TimeLabel">Posted 1d ago ⏰</Box>
+      <Box className="JobCard-TimeLabel">
+        ⌛ Posted {`${generateRandomNumber()}`}d ago
+      </Box>
       <Box className="JobCard-DetailsWrapper">
         <Box className="JobCard-Logo">
           <img
