@@ -42,3 +42,18 @@ export interface JobCardProps {
 export interface JobsGridComponentProps {
   data: JobData[];
 }
+
+export interface ReferralUserProps {
+  image: string;
+  isOnline: boolean;
+}
+
+export interface FluidImageProps {
+  src: string;
+}
+
+export interface JobDetailsModalProps {
+  open: boolean;
+  body: string;
+  handleCloseModal: () => void;
+}

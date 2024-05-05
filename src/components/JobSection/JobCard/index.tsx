@@ -1,21 +1,26 @@
 import { useState } from "react";
 import "./styles.scss";
 
-import { Box, Modal, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import {
-  MATERIAL_UI_MODAL_STYLE,
   generateRandomNumber,
 } from "../../../constants/constants";
+import REF_MALE from "../../../assets/ref-male.jpeg";
+import REF_FEMALE from "../../../assets/ref-female.jpeg";
+
 import { JobCardProps } from "../../../types";
+import ReferralUser from "./ReferalUser";
+import FluidImage from "../../common/FluidImage";
+import JobDetailsModal from "./JobDetailsModal";
 
 const JobCard = (props: JobCardProps) => {
   /**
    * Logic to operate job description modal.
    */
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openJobDetailsModal, setJobDetailsOpen] = useState(false);
+  const handleOpenJobModal = () => setJobDetailsOpen(true);
+  const handleCloseJobModal = () => setJobDetailsOpen(false);
 
   /**
    * Check min and max salary and return formatted string to display.
@@ -63,15 +68,7 @@ const JobCard = (props: JobCardProps) => {
       </Box>
       <Box className="JobCard-DetailsWrapper">
         <Box className="JobCard-Logo">
-          <img
-            src={props.image}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-            alt="weekday"
-          />
+          <FluidImage src={props.image} />
         </Box>
         <Box className="JobCard-DetailsContainer">
           <span className="Name">{props.name}</span>
@@ -80,11 +77,11 @@ const JobCard = (props: JobCardProps) => {
         </Box>
       </Box>
       <Box className="JobCard-EstSalary">
-        Estimated Salary: {getEstimatedSalary()} 💰
+        Estimated Salary: {getEstimatedSalary()} ✅
       </Box>
       <Box className="JobCard-JobDescription">
         <Box className="BackDrop">
-          <span className="BackDrop-Text" onClick={handleOpen}>
+          <span className="BackDrop-Text" onClick={handleOpenJobModal}>
             Show more.
           </span>
         </Box>
@@ -97,25 +94,19 @@ const JobCard = (props: JobCardProps) => {
       </Box>
       <Box className="Btn-Container">
         <Box className="ApplyBtn" onClick={openJobLink}>
-          Apply 🚀
+          ⚡ Apply
         </Box>
-        <Box className="ReferralBtn">Ask for Referral</Box>
+        <Box className="ReferralBtn">
+          <ReferralUser image={REF_MALE} isOnline={true} />
+          <ReferralUser image={REF_FEMALE} isOnline={false} />
+          Ask for Referral
+        </Box>
       </Box>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={MATERIAL_UI_MODAL_STYLE}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            About this job:
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {props.description}
-          </Typography>
-        </Box>
-      </Modal>
+      <JobDetailsModal
+        open={openJobDetailsModal}
+        handleCloseModal={handleCloseJobModal}
+        body={props.description}
+      />
     </Box>
   );
 };

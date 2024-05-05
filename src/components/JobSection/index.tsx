@@ -8,6 +8,7 @@ import { Box, Modal, SelectChangeEvent } from "@mui/material";
 import FormComponent from "./FormComponent";
 import { JobData } from "../../types";
 import JobsGridComponent from "./JobsGridComponent";
+
 import {
   getItemSalaryEligible,
   getJobItemExperience,
@@ -158,6 +159,7 @@ const JobSection = () => {
         ) : (
           <>
             <JobsGridComponent data={filteredData} />
+            {/*Dummy div for intersection observer to work.*/}
             <div ref={containerRef}></div>
           </>
         )}
