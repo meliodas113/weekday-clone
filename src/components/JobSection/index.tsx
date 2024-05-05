@@ -12,6 +12,7 @@ import JobsGridComponent from "./JobsGridComponent";
 import {
   getItemSalaryEligible,
   getJobItemExperience,
+  getRemoteCheckEligible,
 } from "../../constants/constants";
 
 const JobSection = () => {
@@ -19,6 +20,7 @@ const JobSection = () => {
   const [roles, setRoles] = React.useState<string[]>([]);
   const [experience, setExperience] = useState<string[]>([]);
   const [salary, setSalary] = useState<string[]>([]);
+  const [remote, setRemote] = useState<string[]>([]);
   const { data, isLoading, getJobsDataNextIteration } = useGetJobsData();
   const [filteredData, setFilteredData] = useState<JobData[]>([]);
 
@@ -70,7 +72,7 @@ const JobSection = () => {
    * Function to capture roles filter.
    * @param event
    */
-  const handleRolesChange = (event: SelectChangeEvent<typeof roles>) => {
+  const handleRolesChange = (event: SelectChangeEvent<typeof roles>): void => {
     const {
       target: { value },
     } = event;
@@ -86,7 +88,9 @@ const JobSection = () => {
    * @param event
    * @returns
    */
-  const handleExpChange = (event: SelectChangeEvent<typeof experience>) => {
+  const handleExpChange = (
+    event: SelectChangeEvent<typeof experience>
+  ): void => {
     const {
       target: { value },
     } = event;
@@ -97,6 +101,25 @@ const JobSection = () => {
     setExperience(
       typeof value === "string" ? [value.toLocaleLowerCase()] : value
     );
+    handleCloseDrawer();
+  };
+
+  /**
+   * Function to capture remote filters
+   * @param event
+   * @returns
+   */
+  const handleRemoteChange = (
+    event: SelectChangeEvent<typeof experience>
+  ): void => {
+    const {
+      target: { value },
+    } = event;
+    if (!value) {
+      setRemote([]);
+      return;
+    }
+    setRemote(typeof value === "string" ? [value.toLocaleLowerCase()] : value);
     handleCloseDrawer();
   };
 
@@ -132,11 +155,13 @@ const JobSection = () => {
             .includes(item.jobRole.toLowerCase())) &&
         (experience.length === 0 ||
           getJobItemExperience(item) <= Number(experience[0])) &&
-        (salary.length === 0 || getItemSalaryEligible(item, Number(salary[0])))
+        (salary.length === 0 ||
+          getItemSalaryEligible(item, Number(salary[0]))) &&
+        (remote.length === 0 || getRemoteCheckEligible(item, remote[0]))
     );
 
     setFilteredData(filteredData);
-  }, [data, roles, experience, salary, isLoading]);
+  }, [data, roles, experience, salary, isLoading, remote]);
 
   return (
     <Box className="JobSection-Container">
@@ -146,9 +171,11 @@ const JobSection = () => {
           selectedRoles={roles}
           selectedExp={experience}
           selectedSalary={salary}
+          selectedRemote={remote}
           handleExpChange={handleExpChange}
           handleRolesChange={handleRolesChange}
           handleSalaryChange={handleSalaryChange}
+          handleRemoteChange={handleRemoteChange}
         />
       </Box>
       <Box className="JobSection-JobCardContainer">
@@ -179,10 +206,12 @@ const JobSection = () => {
             selectedRoles={roles}
             selectedExp={experience}
             selectedSalary={salary}
+            selectedRemote={remote}
             handleExpChange={handleExpChange}
             handleRolesChange={handleRolesChange}
             handleSalaryChange={handleSalaryChange}
-          />{" "}
+            handleRemoteChange={handleRemoteChange}
+          />
         </Box>
       </Modal>
     </Box>

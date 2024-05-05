@@ -11,6 +11,7 @@ import {
 import {
   EXP_VALUES,
   MenuProps,
+  REMOTE_VALUES,
   ROLES_VALUES,
   SALARY_VALUES,
 } from "../../../constants/constants";
@@ -22,10 +23,10 @@ const FormComponent = (props: FormComponentProps) => {
   return (
     <>
       <FormControl sx={{ m: 1, width: props.width }}>
-        <InputLabel id="demo-multiple-name-label">Roles</InputLabel>
+        <InputLabel id="role-label">Roles</InputLabel>
         <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
+          labelId="role-label"
+          id="role-select"
           multiple
           value={props.selectedRoles}
           onChange={props.handleRolesChange}
@@ -66,10 +67,10 @@ const FormComponent = (props: FormComponentProps) => {
         </Select>
       </FormControl>
       <FormControl sx={{ m: 1, width: props.width }}>
-        <InputLabel id="demo-multiple-chip-label-salary">Salary</InputLabel>
+        <InputLabel id="salary-label">Salary</InputLabel>
         <Select
-          labelId="demo-multiple-chip-label-salary"
-          id="demo-multiple-chip"
+          labelId="salary-label"
+          id="salary-select"
           value={props.selectedSalary}
           onChange={props.handleSalaryChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
@@ -88,6 +89,33 @@ const FormComponent = (props: FormComponentProps) => {
           {SALARY_VALUES.map((el) => (
             <MenuItem key={el} value={el}>
               {el}USD
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, width: props.width }}>
+        <InputLabel id="remote-label">Remote</InputLabel>
+        <Select
+          labelId="remote-label"
+          id="remote-select"
+          value={props.selectedRemote}
+          onChange={props.handleRemoteChange}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          renderValue={(selected) => (
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
+              ))}
+            </Box>
+          )}
+          MenuProps={MenuProps}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {REMOTE_VALUES.map((el) => (
+            <MenuItem key={el} value={el}>
+              {el}
             </MenuItem>
           ))}
         </Select>

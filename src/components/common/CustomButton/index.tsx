@@ -1,17 +1,9 @@
 import { Box } from "@mui/material";
 import "./styles.scss";
 
-type Props = {
-  cta: string;
-  ctaColor:string;
-  color: string;
-  width: string;
-  height: string;
-  onClick: () => void;
-  children?: JSX.Element;
-};
+import { CustomButtonsProps } from "../../../types";
 
-const CustomButtons = (props: Props) => {
+const CustomButtons = (props: CustomButtonsProps) => {
   return (
     <Box
       style={{

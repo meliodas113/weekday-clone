@@ -20,9 +20,11 @@ export interface FormComponentProps {
   selectedRoles: string[];
   selectedExp: string[];
   selectedSalary: string[];
+  selectedRemote: string[];
   handleRolesChange: (event: SelectChangeEvent<string[]>) => void;
   handleExpChange: (event: SelectChangeEvent<string[]>) => void;
   handleSalaryChange: (event: SelectChangeEvent<string[]>) => void;
+  handleRemoteChange: (event: SelectChangeEvent<string[]>) => void;
 }
 
 export interface JobCardProps {
@@ -56,4 +58,19 @@ export interface JobDetailsModalProps {
   open: boolean;
   body: string;
   handleCloseModal: () => void;
+}
+
+export interface CustomButtonsProps {
+  cta: string;
+  ctaColor: string;
+  color: string;
+  width: string;
+  height: string;
+  onClick: () => void;
+  children?: JSX.Element;
+}
+
+export interface LableTileProps {
+  width: string;
+  labelContent: string;
 }

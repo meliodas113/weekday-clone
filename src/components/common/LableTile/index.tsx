@@ -1,12 +1,10 @@
 import { Box } from "@mui/material";
 import "./styles.scss";
 
-type Props = {
-  width: string;
-  labelContent: string;
-};
+import { LableTileProps } from "../../../types";
 
-const LableTile = (props: Props) => {
+
+const LableTile = (props: LableTileProps) => {
   return (
     <Box style={{ width: props.width }} className="LableTile">
       {props.labelContent}
